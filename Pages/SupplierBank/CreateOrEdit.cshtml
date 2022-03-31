@@ -1,0 +1,93 @@
+﻿@*@page*@
+@model TransferBankInformation.ViewModels.SupplierBankInfoModal;
+@{
+}
+
+<form id="create-form" method="post">
+
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Cédula</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.Cedula" name="Cedula" class="form-control" id="cedula">
+            <span asp-validation-for="@Model.Cedula" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Nombre Registral</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.NombreRegistral" name="NombreRegistral" class="form-control" id="nombreregistral">
+            <span asp-validation-for="@Model.NombreRegistral" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Nombre Comercial</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.NombreComercial" name="NombreComercial" class="form-control" id="nombrecomercial">
+            <span asp-validation-for="@Model.NombreComercial" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Dirección</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.Direccion" name="Direccion" class="form-control" id="direccion">
+            <span asp-validation-for="@Model.Direccion" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Banco</label>
+        <div class="col-md-9">
+            <select class="form-control" name="Banco" asp-items="@Model.Bancos" asp-for="@Model.Banco" id="banco"></select>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Moneda</label>
+        <div class="col-md-9">
+
+            <select class="form-control" name="Moneda" asp-items="@Model.Monedas" asp-for="@Model.Moneda" id="moneda"></select>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Principal</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.Principal" name="Principal" class="form-control" id="principal" />
+            <span asp-validation-for="@Model.Principal" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Secundaria</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.Secundaria" name="Secundaria" class="form-control"  id="secundaria"/>
+            <span asp-validation-for="@Model.Secundaria" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Código ABA</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.CodigoAba" name="CodigoAba" class="form-control"  id="codigoaba"/>
+            <span asp-validation-for="@Model.CodigoAba" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Código Swift</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.CodigoSwift" name="CodigoSwift" class="form-control"  id="codigoswift"/>
+            <span asp-validation-for="@Model.CodigoSwift" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label">Auxiliar</label>
+        <div class="col-md-9">
+            <input type="text" autocomplete="off" asp-for="@Model.Auxiliar" name="Auxiliar" class="form-control"  id="auxiliar"/>
+            <span asp-validation-for="@Model.Auxiliar" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+        </div>
+    </div>
+  
+
+</form>
