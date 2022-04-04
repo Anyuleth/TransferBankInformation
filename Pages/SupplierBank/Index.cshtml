@@ -133,13 +133,14 @@
                 try {
                     $.ajax({
                         type: 'POST',
-                        url: "http://localhost:56091/api/BankInfo",
+                        //url: "http://localhost:56091/api/BankInfo",
+                        url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
                         data: JSON.stringify(form),
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
                           
                             alertify.success('Ok');
-                           
+                            location.reload();
                         },
                         error: function (err) {
                             console.log(err)
@@ -159,7 +160,8 @@
                 try {
                     $.ajax({
                         type: 'GET',
-                        url: "http://localhost:56091/api/BankInfo/" + cedula,
+                        //url: "http://localhost:56091/api/BankInfo/" + cedula,
+                        url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
                             if (res) {

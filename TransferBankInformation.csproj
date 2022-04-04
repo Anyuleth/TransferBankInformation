@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>248821bc-1d0e-4da3-9513-5569c71681df</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AlertifyJS" Version="1.13.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
@@ -18,5 +20,7 @@
     <ProjectReference Include="..\TranferBankInformation.Repositories\TranferBankInformation.Repositories.csproj" />
     <ProjectReference Include="..\TranferBankInformation.Services\TranferBankInformation.Services.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4lib_4bootstrap_4dist_4css_4bootstrap_1css_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -6,19 +6,19 @@
 <form id="create-form" method="post">
 
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Cédula</label>
-        <div class="col-md-9">
+        <label class="col-md-6 col-form-label">Cédula</label>
+        <div class="col-md-6">
             <input type="text" autocomplete="off" asp-for="@Model.Cedula" name="Cedula" class="form-control" id="cedula">
             <span asp-validation-for="@Model.Cedula" class="text-danger"></span>
         </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-md-3 col-form-label">Nombre Registral</label>
-        <div class="col-md-9">
+
+        <label class="col-md-6 col-form-label">Nombre Registral</label>
+        <div class="col-md-6">
             <input type="text" autocomplete="off" asp-for="@Model.NombreRegistral" name="NombreRegistral" class="form-control" id="nombreregistral">
             <span asp-validation-for="@Model.NombreRegistral" class="text-danger"></span>
         </div>
     </div>
+    
     <div class="form-group row">
         <label class="col-md-3 col-form-label">Nombre Comercial</label>
         <div class="col-md-9">
