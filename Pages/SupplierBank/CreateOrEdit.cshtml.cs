@@ -24,8 +24,13 @@ namespace TransferBankInformation.Pages.SupplierBank
 
         public List<SelectListItem> Monedas { get; set; }
         [BindProperty]
+        public List<SupplierBankInfo> SupplierBankInfoList { get; set; }
+
+        public SupplierBankInfoModal SupplierBankInfoItem { get; set; }
         public SupplierBankInfo SupplierBankInfo { get; set; }
 
+   
+        #region comments
         //public CreateModel(IHtmlLocalizer<Resources.SharedMessages> sharedMessagesLocalizer, ISupplierBankServices supplierBankServices, IHtmlLocalizer<IndexModel> Localizer)
         //{
         //    _supplierBankServices = supplierBankServices;
@@ -68,11 +73,11 @@ namespace TransferBankInformation.Pages.SupplierBank
 
         //private async Task GetRequiredDataToLoadPage(string cedula)
         //{
-            
+
 
         //    var supplierBank = _supplierBankServices.SearchSupplierBank(cedula);
-           
-          
+
+
 
         //    await Task.WhenAll(supplierBank);
         //    if (supplierBank.Result != null)
@@ -97,7 +102,7 @@ namespace TransferBankInformation.Pages.SupplierBank
         //    {
         //        SupplierBankInfo.Cedula = cedula;
         //    }
-            
+
 
         //}
 
@@ -113,7 +118,7 @@ namespace TransferBankInformation.Pages.SupplierBank
 
         //           // var existClient = await _supplierBankServices.SearchSupplierBank(SupplierBankInfo.Cedula);
 
-                    
+
         //                var t = Request.Form["Cedula"];
         //                var registerResponse = await _supplierBankServices.SaveSupplierBank(new SupplierBankDTO()
         //                {
@@ -136,7 +141,7 @@ namespace TransferBankInformation.Pages.SupplierBank
         //                return RedirectToPage("./Index");
 
 
-                 
+
 
         //        }
         //    }
@@ -150,5 +155,6 @@ namespace TransferBankInformation.Pages.SupplierBank
         //    return Page();
 
         //}
+        #endregion
     }
 }

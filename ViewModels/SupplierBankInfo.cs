@@ -22,6 +22,14 @@ namespace TransferBankInformation.ViewModels
         public string Auxiliar { get; set; }
     }
 
+    public class SupplierInfo
+    {
+        public string Cedula{ get; set; }
+        public string Nombre { get; set; }
+        public string Pais { get; set; }
+
+    }
+
     public class SupplierBankInfoModal
     {
         [Required]

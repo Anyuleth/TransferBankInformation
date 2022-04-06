@@ -27,6 +27,22 @@ namespace TransferBankInformation.Controllers
         [HttpGet("{cedula}")]
         public async Task<ActionResult> GetAsync(string cedula)
         {
+            var supplierBank = await _supplierBankServices.GetSuppliersBank(cedula);
+            var SupplierBankInfo = (from a in supplierBank
+                                select new SupplierBankInfo()
+                                {
+                                    Cedula = a.Cedula,
+                                    Banco = a.Banco,
+                                    NombreRegistral = a.NombreRegistral,
+                                    NombreComercial = a.NombreComercial,
+                                    Moneda = a.Moneda,
+                                    CodigoSwift = a.CodigoSwift,
+                                    CodigoAba = a.CodigoAba,
+                                    Direccion = a.Direccion,
+                                    Principal = a.Principal,
+                                    Secundaria = a.Secundaria,
+                                    Auxiliar = a.Auxiliar
+                                }).ToList();
             return Ok(await _supplierBankServices.SearchSupplierBank(cedula));
         }
 

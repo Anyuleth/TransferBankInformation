@@ -8,11 +8,14 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
+               
                 <h5 class="modal-title" id="exampleModalLabel">Información Bancaria</h5>
+
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,99 +23,155 @@
             <div class="modal-body">
 
                 @Html.Partial("CreateOrEdit", Model.SupplierBankInfoItem)
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="save">Guardar</button>
+                </div>
+                <div>
 
-               
+                    <table class="table" id="supplierTable">
+
+                        <thead>
+                            <tr>
+                                @*<th>
+                            @Html.DisplayName("Cédula")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Nombre Registral")
+                        </th>*@
+                                <th>
+                                    @Html.DisplayName("Banco")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Moneda")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Principal")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Secundaria")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Código Swift")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Código ABA")
+                                </th>
+                                <th>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.SupplierBankInfo)
+                            {
+                                <tr>
+                                    @*<td>
+                                @Html.DisplayFor(modelItem => item.Cedula)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreRegistral)
+                            </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Banco)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Moneda)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Principal)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Secundaria)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CodigoSwift)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CodigoAba)
+                                    </td>
+                                    <td>
+                                        @*<a asp-route-cedula="@item.Cedula"><i class="fas fa-edit"></i></a> *@
+
+                                        <a asp-route-cedula="@item.Cedula" class="editbtn" param-cedula="@item.Cedula" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+                </div>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="save">Save changes</button>
-            </div>
+           
         </div>
     </div>
 </div>
 
 
 <div class="card">
-    <div class="col-sm-12" style="padding:20px">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="newBtn">
-            New Information
-        </button>
+      <div id="viewAll" class="card-body table-responsive">
+        <table class="table table-bordered" id="customerTable" >
 
-
-    </div>
-    <div id="viewAll" class="card-body table-responsive">
-        <table class="table table-bordered" id="customerTable">
             <thead>
                 <tr>
                     <th>
                         @Html.DisplayName("Cédula")
                     </th>
                     <th>
-                        @Html.DisplayName("Nombre Registral")
+                        @Html.DisplayName("Nombre")
                     </th>
                     <th>
-                        @Html.DisplayName("Banco")
+                        @Html.DisplayName("Pais")
                     </th>
-                    <th>
-                        @Html.DisplayName("Principal")
-                    </th>
-                    @*<th>
-                            @Html.DisplayName("Secundaria")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Código Swift")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Código ABA")
-                        </th>*@
-                    <th>Action</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.SupplierBankInfo)
+                @foreach (var item in Model.SupplierInfo)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cedula)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NombreRegistral)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Banco)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Principal)
-                        </td>
-
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Secundaria)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CodigoSwift)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CodigoAba)
-                            </td>*@
+                <tr>
                     <td>
-                        @*<a asp-page="./createoredit" asp-route-cedula="@item.Cedula"><i class="fas fa-edit"></i></a>*@
-                        <a class="editbtn" param-cedula="@item.Cedula" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></a>
+                        @Html.DisplayFor(modelItem => item.Cedula)
                     </td>
-                    </tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pais)
+                    </td>
+                   
+                    <td>
+                        @*<a asp-route-cedula="@item.Cedula"><i class="fas fa-edit"></i></a>*@
+
+                        <a asp-route-cedula="@item.Cedula" ><i class="fas fa-eye"></i></a>
+                    
+
+                    </td>
+                    <td>
+                        
+                        <a class="editbtn" param-cedula="@item.Cedula" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></a>
+
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
     </div>
+
 </div>
 @section Scripts
 {
 
-    <script>
 
-        $(document).ready(function () {
+    <script>
+            $(document).ready(function () {
             
+
             $("#save").click(function () {
 
                 var form = {
@@ -133,8 +192,8 @@
                 try {
                     $.ajax({
                         type: 'POST',
-                        //url: "http://localhost:56091/api/BankInfo",
-                        url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
+                        url: "http://localhost:56091/api/BankInfo",
+                        //url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
                         data: JSON.stringify(form),
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
@@ -155,13 +214,17 @@
             $(".editbtn").on("click", function () {
             //$(".editbtn").click(function () {
                 var cedula = $(this).attr("param-cedula");
-                console.log("SEARCHING: " + cedula);
+                var codigoswift = $(this).attr("param-codigoswift");
+                var codigoaba = $(this).attr("param-codigoaba");
+                var principal = $(this).attr("param-principal");
+                var secundaria = $(this).attr("param-secundaria");
+                console.log("SEARCHING: " + cedula + '   ' + codigoswift + '   ' + codigoaba + '   ' + principal + '   ' + secundaria);
 
                 try {
                     $.ajax({
                         type: 'GET',
-                        //url: "http://localhost:56091/api/BankInfo/" + cedula,
-                        url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
+                        url: "http://localhost:56091/api/BankInfo/" + cedula,
+                        //url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
                             if (res) {
@@ -186,6 +249,7 @@
                     console.log(ex)
                 }
             });
+
             $("#newBtn").click(function () {
                
                 $("#cedula").val('')
@@ -202,8 +266,11 @@
            
             });
             
-            //$("#exampleModal").modal('hide');
+        
             $('#customerTable').DataTable();
+
+
+
         });
     </script>
 

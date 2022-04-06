@@ -20,6 +20,8 @@ namespace TransferBankInformation.Pages.SupplierBank
 
         [BindProperty]
         public List<SupplierBankInfo> SupplierBankInfo { get; set; }
+        [BindProperty]
+        public List<SupplierInfo> SupplierInfo { get; set; }
 
         public SupplierBankInfoModal SupplierBankInfoItem { get; set; }
 
@@ -53,8 +55,6 @@ namespace TransferBankInformation.Pages.SupplierBank
 
 
         public async Task<ActionResult> OnGetAsync(string cedula)
-        
-        
         {
             PageMessage msg;
             try
@@ -75,7 +75,17 @@ namespace TransferBankInformation.Pages.SupplierBank
 
         private async Task GetRequiredDataToLoadPage( string cedula)
         {
-            var supplierBank = await _supplierBankServices.GetSuppliersBank();
+           // cedula = "3101124386";
+            var supplier = await _supplierBankServices.GetSupplierList();
+            SupplierInfo = (from a in supplier
+                            select new SupplierInfo()
+                            {
+                                Cedula = a.Cedula,
+                                Nombre = a.Nombre,
+                                Pais = a.Pais,
+
+                            }).ToList();
+            var supplierBank = await _supplierBankServices.GetSuppliersBank(cedula);
             SupplierBankInfo = (from a in supplierBank
                                select new SupplierBankInfo()
                                {
@@ -92,8 +102,8 @@ namespace TransferBankInformation.Pages.SupplierBank
                                    Auxiliar = a.Auxiliar
                                }).ToList();
 
+         
 
-           
 
         }
     }
