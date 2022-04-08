@@ -27,24 +27,18 @@ namespace TransferBankInformation.Controllers
         [HttpGet("{cedula}")]
         public async Task<ActionResult> GetAsync(string cedula)
         {
-            var supplierBank = await _supplierBankServices.GetSuppliersBank(cedula);
-            var SupplierBankInfo = (from a in supplierBank
-                                select new SupplierBankInfo()
-                                {
-                                    Cedula = a.Cedula,
-                                    Banco = a.Banco,
-                                    NombreRegistral = a.NombreRegistral,
-                                    NombreComercial = a.NombreComercial,
-                                    Moneda = a.Moneda,
-                                    CodigoSwift = a.CodigoSwift,
-                                    CodigoAba = a.CodigoAba,
-                                    Direccion = a.Direccion,
-                                    Principal = a.Principal,
-                                    Secundaria = a.Secundaria,
-                                    Auxiliar = a.Auxiliar
-                                }).ToList();
-            return Ok(await _supplierBankServices.SearchSupplierBank(cedula));
+           return Ok(await _supplierBankServices.GetSuppliersBank(cedula));
         }
+
+        // GET api/<BankInfoController>/GetbyID/5
+        [HttpGet("GetbyID/{cedula}/{principal?}/{secundaria?}/{codigoaba?}/{codigoswift?}")]
+        public async Task<ActionResult> GetbyID(string cedula, string principal, string secundaria, string codigoaba, string codigoswift)
+        {
+           
+            return Ok(await _supplierBankServices.SearchSupplierBank(cedula,  principal,  secundaria,  codigoaba, codigoswift));
+        }
+
+
 
         // POST api/<BankInfoController>
         [HttpPost]

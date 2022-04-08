@@ -61,7 +61,8 @@ namespace TransferBankInformation
                                       builder =>
                                       {
                                           builder.WithOrigins("http://localhost:56091", "https://localhost:44324", "http://172.23.24.117/TransferBankInformation/",  "http://172.23.24.117/TransferBankInformation/SupplierBank", 
-                                              "https://172.23.24.117/TransferBankInformation/SupplierBank", "http://172.23.24.117/TransferBankInformation/api/BankInfo/", "https://172.23.24.117/TransferBankInformation/api/BankInfo/")
+                                              "https://172.23.24.117/TransferBankInformation/SupplierBank", "http://172.23.24.117/TransferBankInformation/api/BankInfo/", "https://172.23.24.117/TransferBankInformation/api/BankInfo/",
+                                              "http://localhost:56091/TransferBankInformation/api/BankInfo/", "http://localhost:56091/TransferBankInformation/api/BankInfo/GetbyID/", "http://172.23.24.117/TransferBankInformation/api/BankInfo/GetbyID/")
                                                               .AllowAnyHeader()
                                                               .AllowAnyMethod();
                                       });

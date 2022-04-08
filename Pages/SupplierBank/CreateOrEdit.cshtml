@@ -78,6 +78,42 @@
 
         $(document).ready(function () {
 
+            $("#mytableexample").on("click", "td", function (e) {
+                var cedula = $(this).prevAll('td:last').text();
+            
+                try {
+                    $.ajax({
+                        type: 'GET',
+                         //url: "http://localhost:56091/api/BankInfo/GetbyID/" + cedula,
+                       url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (res) {
+                            if (res) {
+                                $("#cedula").val(res.cedula)
+                                $("#nombreregistral").val(res.nombreRegistral)
+                                $("#nombrecomercial").val(res.nombreComercial)
+                                $("#banco").val(res.banco)
+                                $("#moneda").val(res.moneda)
+                                $("#codigoaba").val(res.codigoAba)
+                                $("#codigoswift").val(res.codigoSwift)
+                                $("#direccion").val(res.direccion)
+                                $("#principal").val(res.principal)
+                                $("#secundaria").val(res.secundaria)
+                                $("#auxiliar").val(res.auxiliar)
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                } catch (ex) {
+                    console.log(ex)
+                }
+
+                $("#cedula").val(cedula)
+            });
+
+
             $("#save").click(function () {
 
                 var form = {
@@ -98,8 +134,8 @@
                 try {
                     $.ajax({
                         type: 'POST',
-                        url: "http://localhost:56091/api/BankInfo",
-                        //url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
+                         //url: "http://localhost:56091/api/BankInfo",
+                        url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
                         data: JSON.stringify(form),
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
@@ -125,8 +161,8 @@
                 try {
                     $.ajax({
                         type: 'GET',
-                        url: "http://localhost:56091/api/BankInfo/" + cedula,
-                        //url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
+                         //url: "http://localhost:56091/api/BankInfo/" + cedula,
+                        url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
                             if (res) {

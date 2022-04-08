@@ -29,76 +29,29 @@
                 </div>
                 <div>
 
-                    <table class="table" id="supplierTable">
-
+                    <table id="mytableexample" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                @*<th>
-                            @Html.DisplayName("Cédula")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Nombre Registral")
-                        </th>*@
                                 <th>
-                                    @Html.DisplayName("Banco")
+                                    cedula
+                                </th>
+
+                                <th>
+                                    principal
                                 </th>
                                 <th>
-                                    @Html.DisplayName("Moneda")
+                                    secundaria
                                 </th>
                                 <th>
-                                    @Html.DisplayName("Principal")
+                                    codigoaba
                                 </th>
                                 <th>
-                                    @Html.DisplayName("Secundaria")
-                                </th>
-                                <th>
-                                    @Html.DisplayName("Código Swift")
-                                </th>
-                                <th>
-                                    @Html.DisplayName("Código ABA")
-                                </th>
-                                <th>
+                                    codigoswift
                                 </th>
 
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (var item in Model.SupplierBankInfo)
-                            {
-                                <tr>
-                                    @*<td>
-                                @Html.DisplayFor(modelItem => item.Cedula)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreRegistral)
-                            </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Banco)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Moneda)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Principal)
-                                    </td>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Secundaria)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CodigoSwift)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CodigoAba)
-                                    </td>
-                                    <td>
-                                        @*<a asp-route-cedula="@item.Cedula"><i class="fas fa-edit"></i></a> *@
-
-                                        <a asp-route-cedula="@item.Cedula" class="editbtn" param-cedula="@item.Cedula" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></a>
-                                    </td>
-
-                                </tr>
-                            }
+                        <tbody class="tbody">
                         </tbody>
                     </table>
 
@@ -147,14 +100,15 @@
                    
                     <td>
                         @*<a asp-route-cedula="@item.Cedula"><i class="fas fa-edit"></i></a>*@
+                        <a class='loadbtn' param-cedula='@item.Cedula' data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></a>
 
-                        <a asp-route-cedula="@item.Cedula" ><i class="fas fa-eye"></i></a>
-                    
+                        @*<a asp-route-cedula="@item.Cedula"><i class="fas fa-eye"></i></a>*@
+
 
                     </td>
                     <td>
                         
-                        <a class="editbtn" param-cedula="@item.Cedula" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></a>
+                        <a class="loadbtn" param-cedula="@item.Cedula" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></a>
 
                     </td>
                 </tr>
@@ -169,11 +123,59 @@
 
 
     <script>
-            $(document).ready(function () {
-            
+      
+     $(document).ready(function () {
+         $("#mytableexample").on("click", "td", function (e) {
+             console.log($(this));
+                var cedula = $(this).prevAll('td:last').text();
+                var principal = '0';
+                var secundaria = '';
+                var codigoaba = '';
+                var codigoswift = '';
+
+             principal = $(this).closest("tr").children("td").eq(1).html();
+             secundaria = $(this).closest("tr").children("td").eq(2).html();
+             codigoaba = $(this).closest("tr").children("td").eq(3).html();
+             codigoswift = $(this).closest("tr").children("td").eq(4).html();
+
+           
+               
+                try {
+                    $.ajax({
+                        type: 'GET',
+                         //url: "http://localhost:56091/api/BankInfo/GetbyID/" + cedula + "/" + principal + "/" + secundaria + "/" + codigoaba + "/" + codigoswift ,
+                       url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula + "/" + principal + "/" + secundaria + "/" + codigoaba + "/" + codigoswift ,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (res) {
+                            if (res) {
+                                $("#cedula").val(res.cedula)
+                                $("#nombreregistral").val(res.nombreRegistral)
+                                $("#nombrecomercial").val(res.nombreComercial)
+                                $("#banco").val(res.banco)
+                                $("#moneda").val(res.moneda)
+                                $("#codigoaba").val(res.codigoAba)
+                                $("#codigoswift").val(res.codigoSwift)
+                                $("#direccion").val(res.direccion)
+                                $("#principal").val(res.principal)
+                                $("#secundaria").val(res.secundaria)
+                                $("#auxiliar").val(res.auxiliar)
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                } catch (ex) {
+                    console.log(ex)
+                }
+
+                $("#cedula").val(cedula)
+            });
+    
+      
 
             $("#save").click(function () {
-
+            
                 var form = {
 
                     cedula: $("#cedula").val(),
@@ -192,12 +194,12 @@
                 try {
                     $.ajax({
                         type: 'POST',
-                        url: "http://localhost:56091/api/BankInfo",
-                        //url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
+                       //url: "http://localhost:56091/api/BankInfo",
+                          url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
                         data: JSON.stringify(form),
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
-                          
+
                             alertify.success('Ok');
                             location.reload();
                         },
@@ -208,8 +210,45 @@
                 } catch (ex) {
                     console.log(ex)
                 }
-                
+
             });
+            $(".loadbtn").on("click", function () {
+                    //$(".editbtn").click(function () {
+                    var cedula = $(this).attr("param-cedula");
+                    var codigoswift = $(this).attr("param-codigoswift");
+                    var codigoaba = $(this).attr("param-codigoaba");
+                    var principal = $(this).attr("param-principal");
+                    var secundaria = $(this).attr("param-secundaria");
+                    console.log("SEARCHING: " + cedula + '   ' + codigoswift + '   ' + codigoaba + '   ' + principal + '   ' + secundaria);
+                    
+                $("#cedula").val(cedula)
+                    try {
+                        $.ajax({
+                            type: 'GET',
+                           //  url: "http://localhost:56091/api/BankInfo/" + cedula,
+                              url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
+                            contentType: "application/json; charset=utf-8",
+                            success: function (result) {
+                                var html = '';
+                                $.each(result, function (key, item) {
+                                    html += '<tr>';
+                                    html += '<td>' + item.cedula + '</td>';
+                                    html += '<td>' + item.principal + '</td>';
+                                    html += '<td>' + item.secundaria + '</td>';
+                                    html += '<td>' + item.codigoAba + '</td>';
+                                    html += '<td>' + item.codigoSwift + '</td>';
+                                    html += '</tr>';
+                                });
+                                $('.tbody').html(html); 
+                            },
+                            error: function (err) {
+                                console.log(err)
+                            }
+                        })
+                    } catch (ex) {
+                        console.log(ex)
+                    }
+                });
 
             $(".editbtn").on("click", function () {
             //$(".editbtn").click(function () {
@@ -223,8 +262,8 @@
                 try {
                     $.ajax({
                         type: 'GET',
-                        url: "http://localhost:56091/api/BankInfo/" + cedula,
-                        //url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
+                        // url: "http://localhost:56091/api/BankInfo/" + cedula + principal,
+                       url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
                             if (res) {
@@ -251,7 +290,7 @@
             });
 
             $("#newBtn").click(function () {
-               
+
                 $("#cedula").val('')
                 $("#nombreregistral").val('')
                 $("#nombrecomercial").val('')
@@ -263,10 +302,10 @@
                 $("#principal").val('')
                 $("#secundaria").val('')
                 $("#auxiliar").val('')
-           
+
             });
-            
-        
+
+
             $('#customerTable').DataTable();
 
 
