@@ -9,5 +9,7 @@ namespace TransferBankInformation
     {
         public string DefaultCulture { get; set; }
         public string ConnectionString { get; set; }
+        public string EndpointApiUrl { get; set; }
+        
     }
 }

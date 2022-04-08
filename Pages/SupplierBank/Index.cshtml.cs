@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using TranferBankInformation.Services.Services;
 using TransferBankInformation.Helpers;
@@ -18,6 +19,7 @@ namespace TransferBankInformation.Pages.SupplierBank
         private readonly ISupplierBankServices _supplierBankServices;
         public IHtmlLocalizer<Resources.SharedMessages> _sharedMessagesLocalizer { get; private set; }
 
+        public readonly IOptions<AppSettings> _settings;
         [BindProperty]
         public List<SupplierBankInfo> SupplierBankInfo { get; set; }
         [BindProperty]
@@ -25,10 +27,11 @@ namespace TransferBankInformation.Pages.SupplierBank
 
         public SupplierBankInfoModal SupplierBankInfoItem { get; set; }
 
-        public IndexModel(IHtmlLocalizer<Resources.SharedMessages> sharedMessagesLocalizer, ISupplierBankServices supplierBankServices)
+        public IndexModel(IHtmlLocalizer<Resources.SharedMessages> sharedMessagesLocalizer, ISupplierBankServices supplierBankServices, IOptions<AppSettings> settings)
         {
             _supplierBankServices = supplierBankServices;
             _sharedMessagesLocalizer = sharedMessagesLocalizer;
+            _settings = settings;
 
             SupplierBankInfoItem = new SupplierBankInfoModal();
 

@@ -123,7 +123,7 @@
 
 
     <script>
-      
+
      $(document).ready(function () {
          $("#mytableexample").on("click", "td", function (e) {
              console.log($(this));
@@ -138,13 +138,13 @@
              codigoaba = $(this).closest("tr").children("td").eq(3).html();
              codigoswift = $(this).closest("tr").children("td").eq(4).html();
 
-           
-               
+
+
                 try {
                     $.ajax({
                         type: 'GET',
                          //url: "http://localhost:56091/api/BankInfo/GetbyID/" + cedula + "/" + principal + "/" + secundaria + "/" + codigoaba + "/" + codigoswift ,
-                       url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula + "/" + principal + "/" + secundaria + "/" + codigoaba + "/" + codigoswift ,
+                        url: "@Model._settings.Value.EndpointApiUrl" +"BankInfo/GetbyID/" + cedula + "/" + principal + "/" + secundaria + "/" + codigoaba + "/" + codigoswift ,
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
                             if (res) {
@@ -171,11 +171,11 @@
 
                 $("#cedula").val(cedula)
             });
-    
-      
+
+
 
             $("#save").click(function () {
-            
+
                 var form = {
 
                     cedula: $("#cedula").val(),
@@ -195,7 +195,7 @@
                     $.ajax({
                         type: 'POST',
                        //url: "http://localhost:56091/api/BankInfo",
-                          url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/",
+                          url: "@Model._settings.Value.EndpointApiUrl" +"BankInfo/",
                         data: JSON.stringify(form),
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
@@ -220,13 +220,13 @@
                     var principal = $(this).attr("param-principal");
                     var secundaria = $(this).attr("param-secundaria");
                     console.log("SEARCHING: " + cedula + '   ' + codigoswift + '   ' + codigoaba + '   ' + principal + '   ' + secundaria);
-                    
+
                 $("#cedula").val(cedula)
                     try {
                         $.ajax({
                             type: 'GET',
                            //  url: "http://localhost:56091/api/BankInfo/" + cedula,
-                              url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
+                            url: "@Model._settings.Value.EndpointApiUrl"+ "BankInfo/" + cedula,
                             contentType: "application/json; charset=utf-8",
                             success: function (result) {
                                 var html = '';
@@ -239,7 +239,7 @@
                                     html += '<td>' + item.codigoSwift + '</td>';
                                     html += '</tr>';
                                 });
-                                $('.tbody').html(html); 
+                                $('.tbody').html(html);
                             },
                             error: function (err) {
                                 console.log(err)
@@ -263,7 +263,7 @@
                     $.ajax({
                         type: 'GET',
                         // url: "http://localhost:56091/api/BankInfo/" + cedula + principal,
-                       url: "http://172.23.24.117/TransferBankInformation/api/BankInfo/" + cedula,
+                       url: "@Model._settings.Value.EndpointApiUrl" +"BankInfo/" + cedula,
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
                             if (res) {
